@@ -63,7 +63,7 @@ build: .format fusedev virtiofs
 release: fusedev-release virtiofs-release
 fusedev-release: .format .release_version fusedev
 virtiofs-release: .format .release_version virtiofs
-static-release: static-fusedev static-virtiofs
+static-release: static-virtiofs
 static-fusedev: .musl_target .format .release_version fusedev
 static-virtiofs: .musl_target .format .release_version virtiofs
 

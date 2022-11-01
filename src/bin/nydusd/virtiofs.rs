@@ -157,7 +157,11 @@ impl VhostUserBackendMut<VringMutex> for VhostUserFsBackendHandler {
     }
 
     fn protocol_features(&self) -> VhostUserProtocolFeatures {
-        VhostUserProtocolFeatures::MQ | VhostUserProtocolFeatures::SLAVE_REQ
+        VhostUserProtocolFeatures::MQ
+            | VhostUserProtocolFeatures::SLAVE_REQ
+            | VhostUserProtocolFeatures::SLAVE_SEND_FD
+            | VhostUserProtocolFeatures::CONFIGURE_MEM_SLOTS
+            | VhostUserProtocolFeatures::LOG_SHMFD
     }
 
     fn set_event_idx(&mut self, _enabled: bool) {

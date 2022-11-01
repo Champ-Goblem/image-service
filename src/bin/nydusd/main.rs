@@ -623,6 +623,10 @@ fn process_default_fs_service(
         opts.killpriv_v2 = true;
     }
 
+    opts.no_open = false;
+    opts.no_opendir = false;
+    opts.killpriv_v2 = true;
+
     let vfs = fuse_backend_rs::api::Vfs::new(opts);
     let vfs = Arc::new(vfs);
     // Basically, below two arguments are essential for live-upgrade/failover/ and external management.

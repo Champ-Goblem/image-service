@@ -450,6 +450,30 @@ dependencies = [
 [[package]]
 name = "fuse-backend-rs"
 version = "0.9.6"
+dependencies = [
+ "arc-swap",
+ "bitflags",
+ "caps",
+ "core-foundation-sys",
+ "io-uring",
+ "lazy_static",
+ "libc",
+ "log",
+ "mio",
+ "nix",
+ "scoped-tls",
+ "slab",
+ "socket2",
+ "tokio-uring",
+ "vhost 0.4.0",
+ "virtio-queue",
+ "vm-memory",
+ "vmm-sys-util",
+]
+
+[[package]]
+name = "fuse-backend-rs"
+version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "994a3bfb694ee52bf8f3bca80d784b723f150810998219337e429cc5dbe92717"
 dependencies = [
@@ -467,7 +491,7 @@ dependencies = [
  "slab",
  "socket2",
  "tokio-uring",
- "vhost",
+ "vhost 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "virtio-queue",
  "vm-memory",
  "vmm-sys-util",
@@ -1087,7 +1111,7 @@ dependencies = [
 name = "nydus-blobfs"
 version = "0.1.0"
 dependencies = [
- "fuse-backend-rs",
+ "fuse-backend-rs 0.9.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc",
  "log",
  "nydus-app",
@@ -1123,7 +1147,7 @@ dependencies = [
  "bitflags",
  "blake3",
  "flate2",
- "fuse-backend-rs",
+ "fuse-backend-rs 0.9.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures",
  "hmac",
  "lazy_static",
@@ -1156,7 +1180,7 @@ dependencies = [
  "clap",
  "env_logger",
  "flexi_logger",
- "fuse-backend-rs",
+ "fuse-backend-rs 0.9.6",
  "hyper",
  "hyperlocal",
  "lazy_static",
@@ -1185,7 +1209,7 @@ dependencies = [
  "sha2",
  "tar",
  "tokio",
- "vhost",
+ "vhost 0.4.0",
  "vhost-user-backend",
  "virtio-bindings",
  "virtio-queue",
@@ -1203,7 +1227,7 @@ dependencies = [
  "base64",
  "bitflags",
  "dbs-uhttp",
- "fuse-backend-rs",
+ "fuse-backend-rs 0.9.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures",
  "governor",
  "hmac",
@@ -2058,14 +2082,19 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 [[package]]
 name = "vhost"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53567fd9ab820e4f3cc156f24146882fee3c365194c3e1dea74723265f27fc88"
 dependencies = [
  "bitflags",
  "libc",
  "vm-memory",
  "vmm-sys-util",
 ]
+
+[[package]]
+name = "vhost"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53567fd9ab820e4f3cc156f24146882fee3c365194c3e1dea74723265f27fc88"
+replace = "vhost 0.4.0"
 
 [[package]]
 name = "vhost-user-backend"
@@ -2075,7 +2104,7 @@ checksum = "ded8a9f15b09e61bb8a501d0a7a38056f4c1bd7f51cedcd41081c0e4233d5aa6"
 dependencies = [
  "libc",
  "log",
- "vhost",
+ "vhost 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "virtio-bindings",
  "virtio-queue",
  "vm-memory",

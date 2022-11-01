@@ -10,7 +10,7 @@ use std::path::PathBuf;
 use std::str::FromStr;
 use std::sync::{Arc, MutexGuard};
 
-use fuse_backend_rs::api::{BackendFileSystem, Vfs};
+use fuse_backend_rs::api::{BackFileSystem, Vfs};
 #[cfg(target_os = "linux")]
 use fuse_backend_rs::passthrough::{Config, PassthroughFs};
 use nydus::{FsBackendDesc, FsBackendType};
@@ -24,7 +24,7 @@ use crate::upgrade::{self, UpgradeManager};
 use crate::DaemonError;
 
 //TODO: Try to public below type from fuse-rs thus no need to redefine it here.
-type BackFileSystem = Box<dyn BackendFileSystem<Inode = u64, Handle = u64> + Send + Sync>;
+// type BackFileSystem = Box<dyn BackendFileSystem<Inode = u64, Handle = u64> + Send + Sync>;
 
 /// Command to mount a filesystem.
 #[derive(Clone)]
@@ -204,7 +204,7 @@ fn fs_backend_factory(cmd: &FsBackendMountCmd) -> DaemonResult<BackFileSystem> {
             let mut rafs = Rafs::new(rafs_config, &cmd.mountpoint, &mut bootstrap)?;
             rafs.import(bootstrap, prefetch_files)?;
             info!("Rafs imported");
-            Ok(Box::new(rafs))
+            Err(Box::new(rafs))
         }
         FsBackendType::PassthroughFs => {
             #[cfg(target_os = "macos")]
@@ -220,8 +220,11 @@ fn fs_backend_factory(cmd: &FsBackendMountCmd) -> DaemonResult<BackFileSystem> {
                     root_dir: cmd.source.to_string(),
                     do_import: false,
                     writeback: true,
-                    no_open: true,
+                    no_open: false,
+                    no_opendir: false,
                     xattr: true,
+                    cache_policy: CachePolicy::Never,
+                    dax_file_size: Some(0),
                     ..Default::default()
                 };
                 // TODO: Passthrough Fs needs to enlarge rlimit against host. We can exploit `MountCmd`
