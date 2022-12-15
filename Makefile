@@ -106,7 +106,7 @@ macos-ut:
 
 docker-static:
 	docker build -t nydus-rs-static --build-arg RUST_TARGET=${RUST_TARGET} misc/musl-static
-	docker run --rm ${CARGO_BUILD_GEARS} -e RUST_TARGET=${RUST_TARGET} --workdir /nydus-rs -v ${current_dir}:/nydus-rs nydus-rs-static
+	docker run --rm ${CARGO_BUILD_GEARS} -e RUST_TARGET=${RUST_TARGET} --workdir /nydus-rs -v ${current_dir}:/nydus-rs -v /home/administrator/Work/fuse-backend-rs:/fuse-backend-rs -v /home/administrator/Work/vhost:/vhost nydus-rs-static
 
 # Run smoke test including general integration tests and unit tests in container.
 # Nydus binaries should already be prepared.

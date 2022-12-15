@@ -162,6 +162,7 @@ impl VhostUserBackendMut<VringMutex> for VhostUserFsBackendHandler {
             | VhostUserProtocolFeatures::SLAVE_SEND_FD
             | VhostUserProtocolFeatures::CONFIGURE_MEM_SLOTS
             | VhostUserProtocolFeatures::LOG_SHMFD
+            | VhostUserProtocolFeatures::REPLY_ACK
     }
 
     fn set_event_idx(&mut self, _enabled: bool) {

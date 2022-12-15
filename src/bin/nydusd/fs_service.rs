@@ -11,6 +11,7 @@ use std::str::FromStr;
 use std::sync::{Arc, MutexGuard};
 
 use fuse_backend_rs::api::{BackFileSystem, Vfs};
+use fuse_backend_rs::passthrough::CachePolicy;
 #[cfg(target_os = "linux")]
 use fuse_backend_rs::passthrough::{Config, PassthroughFs};
 use nydus::{FsBackendDesc, FsBackendType};
@@ -203,8 +204,7 @@ fn fs_backend_factory(cmd: &FsBackendMountCmd) -> DaemonResult<BackFileSystem> {
             let mut bootstrap = <dyn RafsIoRead>::from_file(&cmd.source)?;
             let mut rafs = Rafs::new(rafs_config, &cmd.mountpoint, &mut bootstrap)?;
             rafs.import(bootstrap, prefetch_files)?;
-            info!("Rafs imported");
-            Err(Box::new(rafs))
+            Err(DaemonError::NotFound)
         }
         FsBackendType::PassthroughFs => {
             #[cfg(target_os = "macos")]
