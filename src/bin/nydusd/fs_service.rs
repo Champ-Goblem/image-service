@@ -225,6 +225,7 @@ fn fs_backend_factory(cmd: &FsBackendMountCmd) -> DaemonResult<BackFileSystem> {
                     xattr: true,
                     cache_policy: CachePolicy::Never,
                     dax_file_size: Some(0),
+                    inode_file_handles: true,
                     ..Default::default()
                 };
                 // TODO: Passthrough Fs needs to enlarge rlimit against host. We can exploit `MountCmd`
